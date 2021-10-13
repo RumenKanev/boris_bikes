@@ -23,4 +23,8 @@ class DockingStation
         end 
     end 
 
+    def dock_bike(bike) 
+        raise "CapacityReached" if @docked == true
+    end
+
 end
