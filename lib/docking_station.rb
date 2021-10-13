@@ -2,29 +2,29 @@ require_relative 'bike.rb'
 
 class DockingStation 
 
-     attr_reader  :docked, :docking
+     attr_reader  :capacity, :docked_bikes
 
     def initialize (bike_from_bike = Bike.new)
-        @docking = bike_from_bike
+        @docked_bikes = [bike_from_bike]
         # @release_bike = bike_from_bike.working
-        @docked = true
+        @capacity = 20
     end
 
     def empty_docking_station
-        @docked = false
+        @docked_bikes = []
     end
 
     def release_bike
-        @docking.working
-        if @docked == false
+        if @docked_bikes.empty?
             raise "No Bike"
         else  
-            @docking.working
+            @docked_bikes.last.working
         end 
     end 
 
     def dock_bike(bike) 
-        raise "CapacityReached" if @docked == true
+        raise "CapacityReached" if @docked_bikes.length == @capacity
+        @docked_bikes << bike
     end
 
 end
